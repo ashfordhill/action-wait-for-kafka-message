@@ -4,10 +4,14 @@
   "description": "GitHub Action to wait for Kafka messages",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "build": "ncc build src/index.js -o dist --minify --no-cache"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
   }
 }

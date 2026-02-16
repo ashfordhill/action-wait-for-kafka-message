@@ -21,4 +21,4 @@ inputs:
     default: 'wait-kafka-action-group'
 runs:
   using: 'node20'
-  main: 'src/index.js'
+  main: 'dist/index.js'
