@@ -1,0 +1,24 @@
+name: 'Wait for Kafka Messages'
+description: 'Wait until a Kafka topic contains a specific number of messages or times out'
+inputs:
+  bootstrap_servers:
+    description: 'Comma-separated list of Kafka brokers'
+    required: true
+  topic:
+    description: 'The Kafka topic to listen on'
+    required: true
+  message_count:
+    description: 'The number of messages to wait for'
+    required: false
+    default: '1'
+  timeout_ms:
+    description: 'The maximum time to wait in milliseconds'
+    required: false
+    default: '60000'
+  group_id:
+    description: 'The consumer group ID'
+    required: false
+    default: 'wait-kafka-action-group'
+runs:
+  using: 'node20'
+  main: 'src/index.js'
