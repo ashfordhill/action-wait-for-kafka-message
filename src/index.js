@@ -27,7 +27,24 @@ async function run() {
     }, timeoutMs);
 
     await consumer.connect();
-    await consumer.subscribe({ topic, fromBeginning: false });
+
+    let subscribed = false;
+    while (!subscribed && !isFinished) {
+      try {
+        await consumer.subscribe({ topic, fromBeginning: false });
+        subscribed = true;
+        console.log(`Successfully subscribed to topic: ${topic}`);
+      } catch (error) {
+        if (error.name === 'KafkaJSProtocolError' && error.code === 3) {
+          console.log(`Topic ${topic} not found, retrying in 5s...`);
+          await new Promise(resolve => setTimeout(resolve, 5000));
+        } else {
+          throw error;
+        }
+      }
+    }
+
+    if (isFinished) return;
 
     console.log(`Listening for ${targetCount} messages on topic: ${topic}`);
 
