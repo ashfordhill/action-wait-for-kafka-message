@@ -1,5 +1,5 @@
 name: 'Wait for Kafka Messages'
-description: 'Wait until a Kafka topic contains a specific number of messages or times out'
+description: 'Wait until a Kafka topic contains a minimum number of messages or times out'
 branding:
   icon: pause-circle
   color: yellow
