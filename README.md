@@ -1,6 +1,8 @@
 # action-wait-for-kafka-message
 GitHub Action to wait until a deployed Kafka instance has traffic on a given topic, or timeout.
 
+If a timeout happens, this will fail the workflow which should indicate that whatever intended publishing didn't not occur as expected.
+
 ## Usage
 
 ```yaml
