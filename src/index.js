@@ -48,25 +48,45 @@ async function run() {
 
     console.log(`Listening for ${targetCount} messages on topic: ${topic}`);
 
-    await consumer.run({
-      eachMessage: async ({ message }) => {
-        if (isFinished) return;
-        
-        messageCounter++;
-        console.log(`Received message ${messageCounter}/${targetCount}`);
-
-        if (messageCounter >= targetCount) {
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(async () => {
+        if (!isFinished) {
           isFinished = true;
-          clearTimeout(timeout);
-          await consumer.disconnect();
-          console.log(`Successfully received ${messageCounter} messages.`);
+          try {
+            await consumer.stop();
+            await consumer.disconnect();
+          } catch (e) {}
+          reject(new Error(`Timed out waiting for ${targetCount} messages on topic ${topic} after ${timeoutMs}ms. Found ${messageCounter} messages.`));
         }
-      },
+      }, timeoutMs);
+
+      consumer.run({
+        eachMessage: async ({ message }) => {
+          if (isFinished) return;
+          
+          messageCounter++;
+          console.log(`Received message ${messageCounter}/${targetCount}`);
+
+          if (messageCounter >= targetCount) {
+            isFinished = true;
+            clearTimeout(timeout);
+            console.log(`Successfully received ${messageCounter} messages.`);
+            try {
+              await consumer.stop();
+              await consumer.disconnect();
+            } catch (e) {}
+            resolve();
+          }
+        },
+      }).catch(reject);
     });
 
   } catch (error) {
     core.setFailed(error.message);
+    process.exit(1);
   }
 }
 
-run();
+run().then(() => {
+  process.exit(0);
+});
