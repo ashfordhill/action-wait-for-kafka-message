@@ -11,4 +11,4 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 
 # Default command (explicit absolute path)
-CMD ["node", "/action/index.js"]
+CMD ["node", "/action/src/index.js"]
