@@ -1,11 +1,11 @@
-# wait-kafka-action
+# action-wait-for-kafka-message
 GitHub Action to wait until a deployed Kafka instance has traffic on a given topic, or timeout.
 
 ## Usage
 
 ```yaml
 - name: Wait for Kafka Traffic
-  uses: ashfordhill/wait-kafka-action@main
+  uses: ashfordhill/action-wait-for-kafka-message@main
   with:
     bootstrap_servers: 'localhost:9092'
     topic: 'my-important-topic'

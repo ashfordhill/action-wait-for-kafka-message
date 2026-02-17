@@ -1,5 +1,5 @@
 {
-  "name": "wait-kafka-action",
+  "name": "action-wait-for-kafka-message",
   "version": "1.0.0",
   "description": "GitHub Action to wait for Kafka messages",
   "main": "src/index.js",
