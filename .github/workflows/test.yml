@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
-
       - name: Background Producer
         run: |
           # Wait for Kafka to be ready, then wait a bit more for the action to start, then produce

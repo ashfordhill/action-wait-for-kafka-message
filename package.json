@@ -2,9 +2,9 @@
   "name": "action-wait-for-kafka-message",
   "version": "1.0.0",
   "description": "GitHub Action to wait for Kafka messages",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
