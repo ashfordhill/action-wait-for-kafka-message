@@ -34,3 +34,9 @@ runs:
       run: node index.js
       shell: bash
       working-directory: ${{ github.action_path }}
+      env:
+        INPUT_BOOTSTRAP_SERVERS: ${{ inputs.bootstrap_servers }}
+        INPUT_TOPIC: ${{ inputs.topic }}
+        INPUT_MESSAGE_COUNT: ${{ inputs.message_count }}
+        INPUT_TIMEOUT_MS: ${{ inputs.timeout_ms }}
+        INPUT_GROUP_ID: ${{ inputs.group_id }}
